@@ -1,0 +1,14 @@
+.grid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.event {
+  width: 20em;
+  height: 20em;
+  justify-content: space-between;
+}
+.grid > * {
+  margin: 3em;
+  justify-content: center;
+}
