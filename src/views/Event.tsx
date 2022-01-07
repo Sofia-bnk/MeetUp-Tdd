@@ -22,17 +22,20 @@ function Event() {
 
   return (
     <div className="event">
-      <input
-        type="text"
-        onChange={(event: any) => setValue(event.target.value)}
-      />
-      <button onClick={() => createComment()}>Send</button>
-
+      <div style={{ marginTop: "2em" }}>
+        <input
+          type="text"
+          onChange={(event: any) => setValue(event.target.value)}
+        />
+        <button onClick={() => createComment()}>Send</button>
+      </div>
       <JoinBtn member={member} setMember={setMember} />
-      <p>{member} going</p>
-      {comments.map((comment) => (
-        <Comment key={comment.id} text={comment.text} />
-      ))}
+      <p className="going">{member} going</p>
+      <div className="grid">
+        {comments.map((comment) => (
+          <Comment key={comment.id} text={comment.text} />
+        ))}
+      </div>
     </div>
   );
 }

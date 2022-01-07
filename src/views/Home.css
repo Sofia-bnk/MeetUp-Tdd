@@ -2,8 +2,9 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
-.event {
+.eventBtn {
   width: 20em;
   height: 20em;
   justify-content: space-between;
