@@ -1,6 +1,7 @@
 import JoinBtn from "../components/JoinBtn";
 import { useState } from "react";
 import Comment from "../components/Comment";
+import Star from "../components/Star";
 function Event() {
   const [member, setMember] = useState(1);
   const [value, setValue] = useState("");
@@ -21,22 +22,27 @@ function Event() {
   }
 
   return (
-    <div className="event">
-      <div style={{ marginTop: "2em" }}>
-        <input
-          type="text"
-          onChange={(event: any) => setValue(event.target.value)}
-        />
-        <button onClick={() => createComment()}>Send</button>
+    <>
+      <div className="event">
+        <div style={{ marginTop: "2em" }}>
+          <input
+            type="text"
+            onChange={(event: any) => setValue(event.target.value)}
+          />
+          <button onClick={() => createComment()}>Send</button>
+        </div>
+        <JoinBtn member={member} setMember={setMember} />
+        <p className="going">{member} going</p>
+        <div className="grid">
+          {comments.map((comment) => (
+            <Comment key={comment.id} text={comment.text} />
+          ))}
+        </div>
       </div>
-      <JoinBtn member={member} setMember={setMember} />
-      <p className="going">{member} going</p>
-      <div className="grid">
-        {comments.map((comment) => (
-          <Comment key={comment.id} text={comment.text} />
-        ))}
+      <div className="starGrid">
+        <Star />
       </div>
-    </div>
+    </>
   );
 }
 
