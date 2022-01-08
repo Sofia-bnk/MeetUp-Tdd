@@ -5,11 +5,11 @@ import { Event } from "../models/Event";
 import { useHistory } from "react-router-dom";
 
 import "./Home.css";
-import { EventDatabase } from "../db/EventDatabase";
+import { EventsDatabase } from "../models/EventsDatabase";
 import EventsContext from "../context/EventsContext";
 
 function Home() {
-  const { events } = useContext<EventDatabase>(EventsContext);
+  const { events, getAverage } = useContext<EventsDatabase>(EventsContext);
 
   const history = useHistory();
 
@@ -33,7 +33,8 @@ function Home() {
               <h1>{event.title}</h1>
               <p>{event.description}</p>
               <p>{event.date.toDateString()}</p>
-              <p>{event.rating}</p>
+              <p>{getAverage(event)}</p>
+
               {checkIfPassed(event) ? (
                 <span style={{ color: "red" }}>This event is passed</span>
               ) : null}

@@ -4,4 +4,5 @@ export interface Event {
   id: number;
   date: Date;
   rating: number;
+  ratings: number[];
 }

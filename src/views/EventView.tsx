@@ -2,9 +2,9 @@ import JoinBtn from "../components/JoinBtn";
 import { useState, useEffect, useContext } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import Comment from "../components/Comment";
-import Star from "../components/Star";
+import { Rating } from "react-simple-star-rating";
 import { Event } from "../models/Event";
-import { EventDatabase } from "../db/EventDatabase";
+import { EventsDatabase } from "../models/EventsDatabase";
 import EventsContext from "../context/EventsContext";
 
 interface MatchParams {
@@ -19,12 +19,19 @@ function EventView({ match }: Props) {
   const [event, setEvent] = useState<Event | undefined>(undefined);
 
   const [comments, setComments] = useState<Comment[]>([]);
-  const { events, getEvent } = useContext<EventDatabase>(EventsContext);
+
+  const { events, getEvent } = useContext<EventsDatabase>(EventsContext);
 
   useEffect(() => {
     let eventId: number = Number(match.params.id) || 0;
     setEvent(getEvent(eventId));
   }, [events, match.params.id, getEvent]);
+
+  const handleRating = (rate: number) => {
+    if (event) {
+      event.ratings.push(rate);
+    }
+  };
 
   interface Comment {
     id: number;
@@ -41,10 +48,6 @@ function EventView({ match }: Props) {
     ];
 
     setComments(cloneComments);
-  }
-
-  function setRating(e: Event, rating: number) {
-    e.rating = rating;
   }
 
   if (event) {
@@ -69,10 +72,7 @@ function EventView({ match }: Props) {
           </div>
         </div>
         <div className="starGrid">
-          <Star
-            rating={event.rating}
-            setRating={(rating) => setRating(event, rating)}
-          />
+          <Rating onClick={handleRating} ratingValue={event.rating} />
         </div>
       </>
     );
