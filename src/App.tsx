@@ -1,13 +1,11 @@
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { useState } from "react";
+
 import "./App.css";
 import Home from "./views/Home";
-import EventView from "./views/EventView";
-import EventsContext from "./context/EventsContext";
-import { EventsDatabase } from "./models/EventsDatabase";
 import { Event } from "./models/Event";
 
 function App() {
-  const events: Event[] = [
+  const [events, setEvents] = useState<Event[]>([
     {
       title: "Art",
       description: "event1",
@@ -40,32 +38,17 @@ function App() {
       rating: 0,
       ratings: [],
     },
-  ];
+  ]);
 
-  const eventDatabase: EventsDatabase = {
-    events: events,
-    getEvent: (id: number) => {
-      return events.find((e) => e.id === id);
-    },
-    getAverage(event: Event) {
-      if (event.ratings.length === 0) {
-        return 0;
-      }
-      let sum: number = 0;
-      event.ratings.map((ratings) => (sum += ratings));
-      return Math.round(sum / event.ratings.length);
-    },
-  };
+  function updateEvent(event: Event) {
+    let updated = events.filter((e) => e.id !== event.id);
+    updated.push(event);
+    setEvents(updated);
+  }
+
   return (
     <div className="App">
-      <EventsContext.Provider value={eventDatabase}>
-        <Router>
-          <Switch>
-            <Route path="/" exact component={Home}></Route>
-            <Route path="/event/:id" component={EventView}></Route>
-          </Switch>
-        </Router>
-      </EventsContext.Provider>
+      <Home events={events} updateEvent={updateEvent} />
     </div>
   );
 }

@@ -3,9 +3,9 @@ import { render } from "@testing-library/react";
 import { mount } from "enzyme";
 
 describe("Home component", () => {
-  const wrapper = mount(<Home />);
+  const wrapper = mount(<Home events={[]} updateEvent={(event) => {}} />);
 
   it("expects component to render", () => {
-    render(<Home />);
+    render(<Home events={[]} updateEvent={(event) => {}} />);
   });
 });
