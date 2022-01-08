@@ -1,37 +1,17 @@
+import { useContext } from "react";
+
 import Header from "../components/Header";
-import { Event } from "../models/EventData";
+import { Event } from "../models/Event";
 import { useHistory } from "react-router-dom";
 
 import "./Home.css";
+import { EventDatabase } from "../db/EventDatabase";
+import EventsContext from "../context/EventsContext";
 
 function Home() {
+  const { events } = useContext<EventDatabase>(EventsContext);
+
   const history = useHistory();
-  const events: Event[] = [
-    {
-      title: "Art",
-      description: "event1",
-      id: 1,
-      date: new Date("2022-01-25"),
-    },
-    {
-      title: "Sport",
-      description: "event2",
-      id: 2,
-      date: new Date("2022-01-20"),
-    },
-    {
-      title: "Fire Festival",
-      description: "event4",
-      id: 4,
-      date: new Date("2022-01-06"),
-    },
-    {
-      title: "Languge",
-      description: "event3",
-      id: 3,
-      date: new Date("2022-02-01"),
-    },
-  ];
 
   function checkIfPassed(event: Event) {
     return event.date.getTime() < new Date().getTime();
@@ -40,7 +20,6 @@ function Home() {
   return (
     <>
       <Header />
-
       <div className="grid">
         {events
           .sort((a, b) => a.date.getTime() - b.date.getTime())
@@ -48,12 +27,13 @@ function Home() {
             <button
               key={event.id}
               type="button"
-              onClick={() => history.push(`/event/${event.title}`)}
+              onClick={() => history.push(`/event/${event.id}`)}
               className="eventBtn"
             >
               <h1>{event.title}</h1>
               <p>{event.description}</p>
               <p>{event.date.toDateString()}</p>
+              <p>{event.rating}</p>
               {checkIfPassed(event) ? (
                 <span style={{ color: "red" }}>This event is passed</span>
               ) : null}

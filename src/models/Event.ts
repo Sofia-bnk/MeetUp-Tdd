@@ -3,4 +3,5 @@ export interface Event {
   description: string;
   id: number;
   date: Date;
+  rating: number;
 }
