@@ -6,6 +6,6 @@ as a user I want to be able to leave a comment in an event to communicate x
 
 as a user I want to be able to join an event if I want x
 
-as a user I want to see the events in order x
+as a user I want to see the events in order to see the most recent one first x
 
 as a user I want to see if an event is passed x
