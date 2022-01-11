@@ -1,6 +1,6 @@
-as a user I want to be able to see the events to join one
-as a user I want to be able to join an event
-as a user I want to be able to see the average rate of an event
-as a user I want to be able to rate an event
-as a use I want to be able to leave a comment in an event
+as a user I want to be able to see all the events to choose x
+as a user I want to be able to click on an event to see the details x
+as a user I want to be able to leave a comment in an event to communicate x
+as a user I want to be able to join an event if I want x
+as a user I want to see the events in order x
 as a user I want to see if an event is passed

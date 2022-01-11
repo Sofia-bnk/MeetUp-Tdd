@@ -19,7 +19,7 @@ function JoinBtn({ member, setMember }: Props) {
           }
         }}
       >
-        {join ? "Joined" : "Join"}
+        <p>{join ? "Joined" : "Join"}</p>
       </button>
     </>
   );

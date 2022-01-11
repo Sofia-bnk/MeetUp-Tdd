@@ -1,10 +1,8 @@
 import { useState } from "react";
-
 import Header from "../components/Header";
 import { Event } from "../models/Event";
 import EventView from "../views/EventView";
 import { Rating } from "react-simple-star-rating";
-
 import "./Home.css";
 
 interface Props {
@@ -42,41 +40,45 @@ function Home({ events, updateEvent }: Props) {
 
   if (selectedEvent) {
     return (
-      <>
+      <div id="event-view">
         <EventView
           event={selectedEvent}
           onClose={() => setSelectedEvent(undefined)}
           onRateEvent={handleRating}
         />
-      </>
+      </div>
     );
   }
 
   return (
     <>
       <Header />
-      <div className="grid">
-        {events
-          .sort((a, b) => a.date.getTime() - b.date.getTime())
-          .map((event) => (
-            <button
-              key={event.id}
-              type="button"
-              onClick={() => setSelectedEvent(event)}
-              className="eventBtn"
-            >
-              <h1>{event.title}</h1>
-              <p>{event.description}</p>
-              <p>{event.date.toDateString()}</p>
-              <p>
-                <Rating readonly ratingValue={event.rating} />
-              </p>
+      <div id="event-list">
+        <div className="grid">
+          {events
+            .sort((a, b) => a.date.getTime() - b.date.getTime())
+            .map((event) => (
+              <button
+                key={event.id}
+                type="button"
+                onClick={() => setSelectedEvent(event)}
+                className="eventBtn "
+                id={`event-${event.id}`}
+              >
+                <h1 className="title">{event.title}</h1>
+                <p>{event.date.toDateString()}</p>
+                <p>
+                  <Rating readonly ratingValue={event.rating} />
+                </p>
 
-              {checkIfPassed(event) ? (
-                <span style={{ color: "red" }}>This event is passed</span>
-              ) : null}
-            </button>
-          ))}
+                {checkIfPassed(event) ? (
+                  <span style={{ color: "red" }} className="passed-event">
+                    This event is passed
+                  </span>
+                ) : null}
+              </button>
+            ))}
+        </div>
       </div>
     </>
   );
