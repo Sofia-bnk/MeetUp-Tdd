@@ -1,8 +1,8 @@
 import JoinBtn from "../components/JoinBtn";
 import { useState } from "react";
-
 import { Rating } from "react-simple-star-rating";
 import { Event } from "../models/Event";
+import "./EventView.css";
 
 interface Props {
   event: Event;
@@ -14,7 +14,7 @@ function EventView({ event, onClose, onRateEvent }: Props) {
   const [member, setMember] = useState(1);
   const [value, setValue] = useState("");
   const [comments, setComments] = useState<Comment[]>([]);
-  const [rating, setRating] = useState(event.rating);
+  const [rating, setRating] = useState(0);
 
   interface Comment {
     id: number;
@@ -39,23 +39,31 @@ function EventView({ event, onClose, onRateEvent }: Props) {
   }
 
   return (
-    <>
-      <button onClick={onClose}>Home</button>
-
-      <div className="event">
-        <div style={{ marginTop: "2em" }}>
-          <h1>{event.title}</h1>
-          <p className="description">{event.description}</p>
-          <input
-            type="text"
-            onChange={(event: any) => setValue(event.target.value)}
-          />
-          <button onClick={() => createComment()} className="sendBtn">
-            Send
-          </button>
-        </div>
+    <div className="event">
+      <div className="join">
         <JoinBtn member={member} setMember={setMember} />
-        <p className="going">{member} going</p>
+        <span className="going">{member} going</span>
+      </div>
+      <header>
+        <h1>{event.title}</h1>
+      </header>
+
+      <main>
+        <div className="starGrid">
+          <Rating onClick={handleRating} ratingValue={rating} />
+          <div className="rating">Rating: {event.rating}</div>
+        </div>
+
+        <p className="description">{event.description}</p>
+        <span>Leave a comment: </span>
+        <input
+          type="text"
+          onChange={(event: any) => setValue(event.target.value)}
+        />
+        <button onClick={() => createComment()} className="sendBtn">
+          Send
+        </button>
+
         <div className="grid">
           {comments.map((comment) => (
             <p key={comment.id} id={comment.text}>
@@ -63,12 +71,13 @@ function EventView({ event, onClose, onRateEvent }: Props) {
             </p>
           ))}
         </div>
-      </div>
-      <div className="starGrid">
-        <Rating onClick={handleRating} ratingValue={rating} />
-        <div>Rating: {event.rating}</div>
-      </div>
-    </>
+      </main>
+      <footer>
+        <button onClick={onClose} className="homeBtn">
+          Back to see events
+        </button>
+      </footer>
+    </div>
   );
 }
 

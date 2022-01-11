@@ -8,7 +8,8 @@ function App() {
   const [events, setEvents] = useState<Event[]>([
     {
       title: "Art",
-      description: "event1",
+      description:
+        " Theatre, dance, and other performing arts, as well as literature, music, film and other media such as interactive media, are included in a broader definition of the arts.[1][8] Until the 17th century, art referred to any skill or mastery and was not differentiated from crafts or sciences.",
       id: 1,
       date: new Date("2022-01-25"),
       rating: 0,
@@ -16,7 +17,8 @@ function App() {
     },
     {
       title: "Sport",
-      description: "event2",
+      description:
+        "Five Barcelona players have received the green light to return to action ahead of Wednesday’s Spanish Supercopa semifinal against Real Madrid",
       id: 2,
       date: new Date("2022-01-20"),
       rating: 0,
@@ -24,7 +26,8 @@ function App() {
     },
     {
       title: "Fire Festival",
-      description: "event4",
+      description:
+        "The event was promoted on Instagram by social media influencers including Kendall Jenner, Bella Hadid, Hailey Baldwin and Emily Ratajkowski, many of whom did not initially disclose they had been paid to do so.[1] During the Fyre Festival's inaugural weekend, the event experienced problems related to security, food, accommodation",
       id: 4,
       date: new Date("2022-01-06"),
       rating: 0,
@@ -32,7 +35,8 @@ function App() {
     },
     {
       title: "Languge",
-      description: "event3",
+      description:
+        "A language is a structured system of communication used by humans. Languages can be based on speech and gesture",
       id: 3,
       date: new Date("2022-02-01"),
       rating: 0,

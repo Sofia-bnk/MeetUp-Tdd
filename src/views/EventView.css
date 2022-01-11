@@ -1,12 +1,18 @@
 .grid {
   display: flex;
   flex-direction: column;
+}
+header {
+  display: flex;
   justify-content: center;
   align-items: center;
 }
-.event {
-  margin: auto;
-}
 .commentInput {
   margin-top: 100px;
+}
+.homeBtn {
+  margin-top: 2em;
+}
+.event {
+  margin: 2em;
 }
