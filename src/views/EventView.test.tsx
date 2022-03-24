@@ -1,7 +1,6 @@
 import EventView from "./EventView";
 import { render } from "@testing-library/react";
 import { mount } from "enzyme";
-import JoinBtn from "../components/JoinBtn";
 import React from "react";
 
 describe("EventView component", () => {
@@ -23,6 +22,7 @@ describe("EventView component", () => {
   });
 
   afterEach(() => {
+    localStorage.clear();
     wrapper.unmount();
   });
 
@@ -56,33 +56,9 @@ describe("EventView component", () => {
 
   it("render 1 aftter clicking on join button twice", () => {
     const joinBtn = wrapper.find("JoinBtn");
-    const expectedText = "1 going";
     joinBtn.simulate("click");
     joinBtn.simulate("click");
-    const actualText = wrapper.find(".going").text();
-    expect(actualText).toBe(expectedText);
-  });
-  it("test if join btn works correctly", () => {
-    let member = 1;
-    let setMember = (value: number) => (member = value);
-    const btn = mount(<JoinBtn member={member} setMember={setMember} />);
-    btn.simulate("click");
-    expect(member).toBe(2);
-  });
-
-  it("show joined after clicking once on join button", () => {
-    const btnWrapper = mount(<JoinBtn member={1} setMember={() => {}} />);
-    btnWrapper.simulate("click");
-
-    const actualText = btnWrapper.find(".btnText").text();
-
-    expect(actualText).toBe("Joined");
-  });
-  it("show join after clicking twice on join button", () => {
-    const btnWrapper = mount(<JoinBtn member={2} setMember={() => {}} />);
-    btnWrapper.simulate("click");
-    btnWrapper.simulate("click");
-    const actualText = btnWrapper.find("p").text();
-    expect(actualText).toBe("Join");
+    const second = wrapper.find(".going").text();
+    expect(second).toBe("1 going");
   });
 });

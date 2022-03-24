@@ -6,13 +6,23 @@ describe("Home component", () => {
   it("expects component to render withour error", () => {
     render(<Home events={[]} updateEvent={() => {}} />);
   });
+  let wrapper: any;
+  beforeEach(() => {
+    wrapper = mount(<Home events={[]} updateEvent={() => {}} />);
+  });
+
+  afterEach(() => {
+    wrapper.unmount();
+    localStorage.clear();
+  });
+
   it("render events", () => {
     const events = [
       {
         title: "test",
         description: "testevent",
         id: 1,
-        date: new Date("2022-01-25"),
+        date: new Date("2022-02-01"),
         rating: 0,
         ratings: [],
       },
@@ -95,20 +105,23 @@ describe("Home component", () => {
     expect(thirdBtn.prop("id")).toBe("event-1");
   });
   it("If the date of an event is passed it shows", () => {
+    var today = new Date();
+    var yesterday = new Date(today.getTime());
+    yesterday.setDate(today.getDate() - 1);
     const events = [
       {
         title: "test1",
-        description: "testevent1",
+        description: "none passed event",
         id: 1,
-        date: new Date("2022-03-01"),
+        date: today,
         rating: 0,
         ratings: [],
       },
       {
         title: "test2",
-        description: "testevent2",
+        description: "passed event",
         id: 2,
-        date: new Date("2022-01-09"),
+        date: yesterday,
         rating: 0,
         ratings: [],
       },

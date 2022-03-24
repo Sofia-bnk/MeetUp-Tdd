@@ -1,25 +1,22 @@
-import { useState } from "react";
 interface Props {
   member: number;
   setMember: (value: number) => void;
+  joined: boolean;
 }
-function JoinBtn({ member, setMember }: Props) {
-  const [join, setJoin] = useState(false);
+function JoinBtn({ member, setMember, joined }: Props) {
   return (
     <>
       <button
         type="button"
         onClick={() => {
-          if (join === false) {
-            setJoin(true);
-            setMember(member + 1);
-          } else if (join === true && member > 1) {
-            setJoin(false);
+          if (joined) {
             setMember(member - 1);
+          } else {
+            setMember(member + 1);
           }
         }}
       >
-        <p className="btnText">{join ? "Joined" : "Join"}</p>
+        <p className="btnText">{joined ? "Joined" : "Join"}</p>
       </button>
     </>
   );

@@ -1,5 +1,5 @@
 import JoinBtn from "../components/JoinBtn";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Rating } from "react-simple-star-rating";
 import { Event } from "../models/Event";
 import "./EventView.css";
@@ -11,10 +11,27 @@ interface Props {
 }
 
 function EventView({ event, onClose, onRateEvent }: Props) {
-  const [member, setMember] = useState(1);
+  const [member, setMember] = useState<number>(1);
+  const [joined, setJoined] = useState(false);
+
   const [value, setValue] = useState("");
   const [comments, setComments] = useState<Comment[]>([]);
   const [rating, setRating] = useState(0);
+
+  useEffect(() => {
+    const members = localStorage.getItem(event.id + "-member");
+    const newMembers = members === null ? 1 : parseInt(members);
+    setMember(newMembers);
+
+    const x = localStorage.getItem(event.id + "-comment");
+
+    const newComment = x === null ? [] : JSON.parse(x);
+    setComments(newComment);
+
+    const isJoined = "true" === localStorage.getItem(event.id + "-join");
+
+    setJoined(isJoined);
+  }, []);
 
   interface Comment {
     id: number;
@@ -34,14 +51,25 @@ function EventView({ event, onClose, onRateEvent }: Props) {
         text: value,
       },
     ];
+    localStorage.setItem(event.id + "-comment", JSON.stringify(cloneComments));
 
     setComments(cloneComments);
+  }
+
+  function handleJoin(updatedMembers: number) {
+    const newStateOfJoined = joined ? false : true;
+
+    setJoined(newStateOfJoined);
+    setMember(updatedMembers);
+
+    localStorage.setItem(event.id + "-join", newStateOfJoined.toString());
+    localStorage.setItem(event.id + "-member", updatedMembers.toString());
   }
 
   return (
     <div className="event">
       <div className="join">
-        <JoinBtn member={member} setMember={setMember} />
+        <JoinBtn member={member} setMember={handleJoin} joined={joined} />
         <span className="going">{member} going</span>
       </div>
       <header>

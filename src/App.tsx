@@ -11,7 +11,7 @@ function App() {
       description:
         " Theatre, dance, and other performing arts, as well as literature, music, film and other media such as interactive media, are included in a broader definition of the arts.[1][8] Until the 17th century, art referred to any skill or mastery and was not differentiated from crafts or sciences.",
       id: 1,
-      date: new Date("2022-01-25"),
+      date: new Date("2022-10-25"),
       rating: 0,
       ratings: [],
     },
@@ -20,7 +20,7 @@ function App() {
       description:
         "Five Barcelona players have received the green light to return to action ahead of Wednesday’s Spanish Supercopa semifinal against Real Madrid",
       id: 2,
-      date: new Date("2022-01-20"),
+      date: new Date("2022-09-20"),
       rating: 0,
       ratings: [],
     },
@@ -29,7 +29,7 @@ function App() {
       description:
         "The event was promoted on Instagram by social media influencers including Kendall Jenner, Bella Hadid, Hailey Baldwin and Emily Ratajkowski, many of whom did not initially disclose they had been paid to do so.[1] During the Fyre Festival's inaugural weekend, the event experienced problems related to security, food, accommodation",
       id: 4,
-      date: new Date("2022-01-06"),
+      date: new Date("2022-08-06"),
       rating: 0,
       ratings: [],
     },
