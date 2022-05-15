@@ -106,7 +106,7 @@ describe("Home component", () => {
   });
   it("If the date of an event is passed it shows", () => {
     var today = new Date();
-    today.setSeconds(today.getSeconds() + 5);
+    today.setMinutes(today.getMinutes() + 5);
     var yesterday = new Date(today.getTime());
     yesterday.setDate(today.getDate() - 1);
     const events = [
